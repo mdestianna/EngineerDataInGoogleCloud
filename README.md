@@ -17,7 +17,7 @@ Lab: https://www.cloudskillsboost.google/focuses/12379?parent=catalog
 You've already completed the first step, and have created a dataset taxirides and imported the historical data to table, historical_taxi_rides_raw. This is data prior for rides to 2015.
 You may need to wait 1-3 minutes for the data to be fully populated in your project.
 To complete this task you will need to:
-* Clean the data in historical_taxi_rides_raw and make a copy to taxi_training_data_328 in the same dataset. You can use BigQuery, DataPrep, DataFlow, etc. to create this table and clean the data. Make sure your target column is called fare_amount_818 .
+* Clean the data in <span style="color:red">historical_taxi_rides_raw</span> and make a copy to taxi_training_data_328 in the same dataset. You can use BigQuery, DataPrep, DataFlow, etc. to create this table and clean the data. Make sure your target column is called fare_amount_818 .
 Some helpful hints:
 * You can see the source dataset in the BQ UI - familiarize yourself with the source schema first.
 * As a hint for the data avilable at prediction time, familiarize yourself with the table taxirides.report_prediction_data which shows the format data will arrive at prediction time.
