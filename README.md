@@ -31,8 +31,7 @@ Data Cleaning Tasks:
 * Only copy fields that will be used in your model (report_prediction_data is a good guide).
 
 ```
-CREATE OR REPLACE TABLE
-  `qwiklabs-gcp-03-24bc07c21bd0.taxirides.taxi_training_data_328` AS
+CREATE OR REPLACE TABLE taxirides.taxi_training_data_328 AS
 SELECT
   (tolls_amount + fare_amount) AS fare_amount_818,
   pickup_datetime,
@@ -42,7 +41,7 @@ SELECT
   dropoff_latitude AS dropofflat,
   passenger_count AS passengers,
 FROM
-  `qwiklabs-gcp-03-24bc07c21bd0.taxirides.historical_taxi_rides_raw`
+  taxirides.historical_taxi_rides_raw
 WHERE
 RAND() < 0.001
 AND trip_distance > 0
@@ -66,9 +65,8 @@ Some helpful hints:
 * ST_distance() and ST_GeogPoint() GIS functions in BigQuery can be used to easily calculate euclidean distance (i.e. how far pickup to dropoff did the taxi travel):
 
 ```
-ST_Distance(ST_GeogPoint(pickuplon, pickuplat), ST_GeogPoint(dropofflon, dropofflat)) AS euclidean
-CREATE OR REPLACE MODEL `qwiklabs-gcp-03-24bc07c21bd0.taxirides.fare_model_477`
-TRANSFORM(
+CREATE OR REPLACE MODEL taxirides.fare_model_477
+TRANSFORM (
 * EXCEPT(pickup_datetime),
 ST_Distance(ST_GeogPoint(pickuplon, pickuplat), 
 ST_GeogPoint(dropofflon, dropofflat)) AS euclidean,
@@ -85,9 +83,9 @@ Leadership is curious to see how well your model performs over new data, in this
 Use ML.PREDICT and your model to predict Fare amount and store your results in a table called 2015_fare_amount_predictions
 
 ```
-CREATE OR REPLACE TABLE `qwiklabs-gcp-03-24bc07c21bd0.taxirides.2015_fare_amount_predictions`
+CREATE OR REPLACE TABLE taxirides.2015_fare_amount_predictions
   AS
 SELECT * FROM ML.PREDICT
 (MODEL taxirides.fare_model_477,
-(SELECT * FROM `qwiklabs-gcp-03-24bc07c21bd0.taxirides.report_prediction_data`))
+(SELECT * FROM taxirides.report_prediction_data))
 ```
